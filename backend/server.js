@@ -3,6 +3,8 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 
+const userRoute = require('./routes/userRoute');
+
 const port = process.env.PORT || 5000;
 const DB_URL = process.env.DATABASE_URL || 'mongodb://127.0.0.1:27017/';
 
@@ -15,18 +17,19 @@ app.use((req, res, next) => {
     next();
 })
 
+// Routes
 app.get('/', (req, res) => {
     res.send('Backend Server is working.')
 })
+
+app.use('/api/user', userRoute);
 
 // DB Connection & Server Setup
 mongoose.set('debug', false);
 mongoose.connect(DB_URL)
     .then(() => {
-        console.log('Connected to MongoDB')
-
         app.listen(port, () => {
-            console.log(`Server is running on http://localhost:${port}`);
+            console.log(`Connected to MongoDB & Server is running on http://localhost:${port}`);
         })
     })
     .catch(err => console.error('MongoDB connection error:', err));
