@@ -1,26 +1,37 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React from "react";
+import { Routes, Route } from "react-router-dom";
 
-import './assets/css/style.css'
+import PrivateRoutes from './context/PrivateRoutes';
+import PublicRoutes from './context/PublicRoutes';
 
 import Layout from "./pages/Layout";
 import Home from "./pages/Home";
 import NoPage from "./pages/NoPage";
-import SignUp from './Components/SignUp';
 
+// Auth Pages
+import SignUp from './Components/SignUp';
+import Login from './Components/Login';
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        {/* Private Routes */}
+        <Route element={<PrivateRoutes />}>
           <Route index element={<Home />} />
-          <Route path="/Signup" element={<SignUp />} />
-          <Route path="*" element={<NoPage />} />
         </Route>
-      </Routes>
-    </BrowserRouter>
-  )
-}
 
-export default App
+        {/* Public Routes */}
+        <Route element={<PublicRoutes />}>
+          <Route path="Login" element={<Login />} />
+          <Route path="SignUp" element={<SignUp />} />
+        </Route>
+
+        {/* Catch-All Route */}
+        <Route path="*" element={<NoPage />} />
+      </Route>
+    </Routes>
+  );
+};
+
+export default App;

@@ -4,7 +4,7 @@ const userModel = require('../models/userModel');
 
 module.exports.signup = async (req, res) => {
     try {
-        const { username, email, password } = req.body;
+        const { username, email, password } = req.body.formData;
 
         // Check if user already exists
         const existingUser = await userModel.findOne({ email });
@@ -24,7 +24,7 @@ module.exports.signup = async (req, res) => {
 
 module.exports.login = async (req, res) => {
     try {
-        const { email, password } = req.body;
+        const { email, password } = req.body.formData;
 
         // Find user
         const user = await userModel.findOne({ email });
