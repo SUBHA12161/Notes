@@ -9,8 +9,8 @@ import Home from "./pages/Home";
 import NoPage from "./pages/NoPage";
 
 // Auth Pages
-import SignUp from './Components/SignUp';
-import Login from './Components/Login';
+import SignUp from './Components/User/SignUp';
+import Login from './Components/User/Login';
 
 const App = () => {
   return (

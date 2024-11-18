@@ -1,8 +1,9 @@
-import React from 'react'
+import React from 'react';
+import NotesGrid from './NotesGrid';
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <NotesGrid />
   )
 }
 
