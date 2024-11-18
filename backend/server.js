@@ -4,6 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 
 const userRoute = require('./routes/userRoute');
+const notesRoute = require('./routes/notesRoute');
 
 const port = process.env.PORT || 5000;
 const DB_URL = process.env.DATABASE_URL || 'mongodb://127.0.0.1:27017/';
@@ -23,6 +24,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api/user', userRoute);
+app.use('/api/notes', notesRoute);
 
 // DB Connection & Server Setup
 mongoose.set('debug', false);
