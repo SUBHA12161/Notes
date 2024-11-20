@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { FaPlus } from "react-icons/fa";
 import { Button } from "reactstrap";
+import { toast, Bounce } from "react-toastify";
 import CreateNote from "./CreateNote";
 import moment from "moment";
-import { toast, Bounce } from "react-toastify";
+import Loader from "../Components/Loader";
 
 const NotesGrid = () => {
     const [isCreateNoteOpen, setCreateNoteOpen] = useState(false);
@@ -55,14 +56,14 @@ const NotesGrid = () => {
     }, []);
 
     const editNotes = async (data) => {
-console.log("data ==",data);
 
+        console.log("data ==", data);
     }
 
     return (
         <div className="notes-grid">
             {isLoading ? (
-                <p>Loading Notes...</p>
+                <Loader />
             ) : notes.length === 0 ? (
                 <p>No notes available.</p>
             ) : (
