@@ -1,11 +1,13 @@
 import { Outlet, Link } from "react-router-dom";
 import React, { useState } from 'react';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, NavbarText } from 'reactstrap';
-import { useAuth } from '../context/AuthContext'; // Import useAuth
+import { useAuth } from '../context/AuthContext';
 
 const Layout = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const { token, logout } = useAuth();
+    const { logout, auThorized } = useAuth();
+    console.log("auThorized == ", auThorized());
+
 
     const toggle = () => setIsOpen(!isOpen);
 
@@ -31,7 +33,7 @@ const Layout = () => {
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="ms-auto" navbar>
-                        {token ? (
+                        {auThorized() ? (
                             <>
                                 <NavItem>
                                     <NavLink tag={Link} to="/">Home</NavLink>

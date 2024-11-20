@@ -1,4 +1,5 @@
 import React, { createContext, useState, useContext } from 'react';
+import { jwtDecode } from "jwt-decode";
 
 const AuthContext = createContext();
 
@@ -17,8 +18,22 @@ export const AuthProvider = ({ children }) => {
         setToken(null);
     };
 
+    const auThorized = () => {
+        if (token) {
+            const decoded = jwtDecode(token);
+            const currentTime = Math.floor(Date.now() / 1000);
+            if (decoded.exp < currentTime) {
+                console.log("Token has expired.");
+                return false;
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     return (
-        <AuthContext.Provider value={{ token, login, logout }}>
+        <AuthContext.Provider value={{ token, login, logout, auThorized }}>
             {children}
         </AuthContext.Provider>
     );
